@@ -27,4 +27,9 @@ alias gs="git status"
 alias lg="lazygit"
 
 alias fp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
-alias vf="v $(fp)"
+alias vf='v $(fp)'
+
+# Node version manager setup (NVM)
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"
+[ -s "/usr/local/opt/nvm/etc/bash_completion" ] && \. "/usr/local/opt/nvm/etc/bash_completion"

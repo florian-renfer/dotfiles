@@ -2,6 +2,12 @@
 # @date: 16.03.2024
 # @version: 1.0
 
+# Setup homebrew properly
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  # needed for brew
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 # Source .bashrc if it exists
 if [ -r ~/.bashrc ]; then
 	source ~/.bashrc
