@@ -9,6 +9,9 @@
 export XDG_CONFIG_HOME=$HOME/.config
 
 # Create symlinks
+ln -sf $PWD/.bash_profile $HOME/.bash_profile
+ln -sf $PWD/.bashrc $HOME/.bashrc
+ln -sf $PWD/.tmux.conf $HOME/.tmux.conf
 
 # Install brew/homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
