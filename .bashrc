@@ -7,6 +7,7 @@ export REPOS="$HOME/repos"
 export GITUSER="florian-renfer"
 export GHREPOS="$REPOS/github.com/$GITUSER"
 export DOTFILES="$GHREPOS/dotfiles"
+export PS1='\[\e[35m\]\u\[\e[0m\]@\[\e[34m\]\h\[\e[0m\] \[\e[96m\]\W\[\e[0m\] \[\e[32m\]\$\[\e[0m\] '
 
 # Aliases
 alias c="clear"
@@ -30,6 +31,8 @@ alias fp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}
 alias vf='v $(fp)'
 
 # Node version manager setup (NVM)
+[ -d "~/.nvm" ] || mkdir ~/.nvm
+
 export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"
-[ -s "/usr/local/opt/nvm/etc/bash_completion" ] && \. "/usr/local/opt/nvm/etc/bash_completion"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"                                       # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
