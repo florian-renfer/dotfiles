@@ -11,6 +11,10 @@ export GHREPOS="$REPOS/github.com/$GITUSER"
 export OPTIMA="heyoptima"
 export OPTIMAREPOS="$REPOS/github.com/$OPTIMA"
 
+# Bits GmbH environment variables
+export BITS="bits"
+export BITSREPOS="$REPOS/github.com/$BITS"
+
 # Dotfiles environment variables
 export DOTFILES="$GHREPOS/dotfiles"
 
@@ -30,6 +34,10 @@ alias conf='cd $GHREPOS/dotfiles'
 alias repo='cd $REPOS'
 alias grepo='cd $GHREPOS'
 alias orepo='cd $OPTIMAREPOS'
+alias brepo='cd $BITSREPOS'
+
+alias abbi='cd $BITSREPOS/abbi/MNAbbiDeveloper'
+alias abbi_ui='cd $BITSREPOS/abbi/MNAbbiDeveloper/abbi-application/src/main/webapp/frontend/abbi-app'
 
 alias ga="git add --all"
 alias gf="git fetch --all --prune"
@@ -39,6 +47,9 @@ alias lg="lazygit"
 
 alias fp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
 alias vf='v $(fp)'
+
+# SDK Man setup (Java)
+source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # Node version manager setup (NVM)
 if [ ! -d "~/.nvm" ]; then
