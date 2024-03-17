@@ -29,6 +29,7 @@ alias ls="ls -la --color=auto"
 alias conf='cd $GHREPOS/dotfiles'
 alias repo='cd $REPOS'
 alias grepo='cd $GHREPOS'
+alias orepo='cd $OPTIMAREPOS'
 
 alias ga="git add --all"
 alias gf="git fetch --all --prune"
@@ -40,7 +41,9 @@ alias fp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}
 alias vf='v $(fp)'
 
 # Node version manager setup (NVM)
-[ -d "~/.nvm" ] || mkdir ~/.nvm
+if [ ! -d "~/.nvm" ]; then
+	mkdir -p ~/.nvm
+fi
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"                                       # This loads nvm

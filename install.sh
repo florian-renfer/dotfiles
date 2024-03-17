@@ -37,7 +37,9 @@ brew tap homebrew/cask-fonts
 brew install --cask font-jetbrains-mono-nerd-font
 
 # Install and use Node.js LTS
-mkdir ~/.nvm
+if [ ! -d "~/.nvm" ]; then
+	mkdir -p ~/.nvm
+fi
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"                                       # This loads nvm
