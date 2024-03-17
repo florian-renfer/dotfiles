@@ -6,7 +6,15 @@
 export REPOS="$HOME/repos"
 export GITUSER="florian-renfer"
 export GHREPOS="$REPOS/github.com/$GITUSER"
+
+# Optima GmbH enviornment variables
+export OPTIMA="heyoptima"
+export OPTIMAREPOS="$REPOS/github.com/$OPTIMA"
+
+# Dotfiles environment variables
 export DOTFILES="$GHREPOS/dotfiles"
+
+# Default bash prompt
 export PS1='\[\e[35m\]\u\[\e[0m\]@\[\e[34m\]\h\[\e[0m\] \[\e[96m\]\W\[\e[0m\] \[\e[32m\]\$\[\e[0m\] '
 
 # Aliases
@@ -20,6 +28,7 @@ alias ls="ls -la --color=auto"
 
 alias conf='cd $GHREPOS/dotfiles'
 alias repo='cd $REPOS'
+alias grepo='cd $GHREPOS'
 
 alias ga="git add --all"
 alias gf="git fetch --all --prune"
