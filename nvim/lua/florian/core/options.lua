@@ -27,11 +27,15 @@ vim.opt.showmode = false
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
 vim.schedule(function()
-  vim.opt.clipboard = 'unnamedplus'
+	vim.opt.clipboard = 'unnamedplus'
 end)
 
 -- Enable break indent
 vim.opt.breakindent = true
+
+-- Reduce default shiftwidth
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
 
 -- Save undo history
 vim.opt.undofile = true

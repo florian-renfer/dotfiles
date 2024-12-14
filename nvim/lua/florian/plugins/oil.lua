@@ -9,6 +9,7 @@ return {
   opts = {
     keymaps = {
       ["q"] = { "actions.close" },
+      ["<bs>"] = { "actions.parent" },
     },
     view_options = {
       show_hidden = true,
