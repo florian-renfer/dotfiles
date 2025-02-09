@@ -30,6 +30,9 @@ info "Creating symlinks..."
 info "======================"
 printf "\n"
 
+# Aerospace
+ln -s $(pwd)/aerospace/aerospace.toml $HOME/.config/aerospace/aerospace.toml
+
 # TMUX
 ln -s $(pwd)/tmux/tmux.conf $HOME/.config/tmux/tmux.conf
 ln -s $(pwd)/tmux/theme.conf $HOME/.config/tmux/theme.conf
