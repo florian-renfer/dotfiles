@@ -50,3 +50,11 @@ info "======================"
 printf "\n"
 
 rm -rf $HOME/.local/scripts
+
+printf "\n"
+info "======================"
+info "Restore ZSH profile..."
+info "======================"
+printf "\n"
+rm -rf $HOME/.zshrc
+mv $HOME/.zshrc.bak $HOME/.zshrc
