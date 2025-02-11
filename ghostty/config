@@ -1,0 +1,19 @@
+# Specify theme
+theme = catppuccin-frappe
+
+# Window decoration
+macos-titlebar-style = hidden
+mouse-hide-while-typing = true
+window-padding-x = 10
+window-padding-y = 10
+
+# Background
+# background = 000000
+background-opacity = 0.75
+background-blur-radius = 20
+
+# Typography
+font-size = 16
+
+# Keybinds
+keybind = super+r=reload_config
