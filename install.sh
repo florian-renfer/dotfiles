@@ -30,12 +30,19 @@ info "Creating symlinks..."
 info "======================"
 printf "\n"
 
+# Ghostty
+mkdir -p $HOME/.config/ghostty
+ln -s $(pwd)/ghostty/config $HOME/.config/ghostty/config
+
 # Aerospace
+mkdir -p $HOME/.config/aerospace
 ln -s $(pwd)/aerospace/aerospace.toml $HOME/.config/aerospace/aerospace.toml
 
 # TMUX
+mkdir -p $HOME/.config/tmux
 ln -s $(pwd)/tmux/tmux.conf $HOME/.config/tmux/tmux.conf
 ln -s $(pwd)/tmux/theme.conf $HOME/.config/tmux/theme.conf
 
 # Neovim
+mkdir -p $HOME/.config/nvim
 ln -s $(pwd)/nvim $HOME/.config/nvim
