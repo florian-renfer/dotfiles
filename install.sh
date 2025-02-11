@@ -45,3 +45,11 @@ ln -s $(pwd)/tmux/theme.conf $HOME/.config/tmux/theme.conf
 
 # Neovim
 ln -s $(pwd)/nvim $HOME/.config
+
+printf "\n"
+info "======================"
+info "Installing scripts..."
+info "======================"
+printf "\n"
+
+ln -s $(pwd)/scripts $HOME/.local

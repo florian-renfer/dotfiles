@@ -41,4 +41,12 @@ rm -rf $HOME/.config/tmux/tmux.conf
 rm -rf $HOME/.config/tmux/theme.conf
 
 # Neovim
-rm -rf $HOME/.config
+rm -rf $HOME/.config/nvim
+
+printf "\n"
+info "======================"
+info "Uninstalling scripts..."
+info "======================"
+printf "\n"
+
+rm -rf $HOME/.local/scripts
