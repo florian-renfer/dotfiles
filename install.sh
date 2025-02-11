@@ -44,5 +44,4 @@ ln -s $(pwd)/tmux/tmux.conf $HOME/.config/tmux/tmux.conf
 ln -s $(pwd)/tmux/theme.conf $HOME/.config/tmux/theme.conf
 
 # Neovim
-mkdir -p $HOME/.config/nvim
-ln -s $(pwd)/nvim $HOME/.config/nvim
+ln -s $(pwd)/nvim $HOME/.config

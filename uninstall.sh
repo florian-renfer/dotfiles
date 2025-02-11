@@ -30,5 +30,15 @@ info "Destroying symlinks..."
 info "======================"
 printf "\n"
 
+# Ghostty
+rm -rf $HOME/.config/ghostty/config
+
+# Aerospace
+rm -rf $HOME/.config/aerospace/aerospace.toml
+
+# TMUX
 rm -rf $HOME/.config/tmux/tmux.conf
 rm -rf $HOME/.config/tmux/theme.conf
+
+# Neovim
+rm -rf $HOME/.config
