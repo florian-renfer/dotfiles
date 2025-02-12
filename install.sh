@@ -57,6 +57,9 @@ ln -s $(pwd)/nvim $HOME/.config
 backup $HOME/.zshrc
 ln -s $(pwd)/zsh/.zshrc $HOME/.zshrc
 
+backup $HOME/.zprofile
+ln -s $(pwd)/zsh/.zprofile $HOME/.zprofile
+
 printf "\n"
 info "======================"
 info "Installing scripts..."
@@ -64,3 +67,4 @@ info "======================"
 printf "\n"
 
 ln -s $(pwd)/scripts $HOME/.local
+

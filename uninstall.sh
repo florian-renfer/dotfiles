@@ -56,5 +56,9 @@ info "======================"
 info "Restore ZSH profile..."
 info "======================"
 printf "\n"
+
 rm -rf $HOME/.zshrc
 mv $HOME/.zshrc.bak $HOME/.zshrc
+
+rm -rf $HOME/.zprofile
+mv $HOME/.zprofile.bak $HOME/.zprofile
