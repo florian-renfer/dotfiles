@@ -105,3 +105,22 @@ fi
 alias c="clear"
 alias e="exit"
 alias lg="lazygit"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
+
+# Add libpq to path
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+export XDG_CONFIG_HOME="/Users/florian/.config"
+export XDG_DATA_HOME="/Users/florian/.local/share"
+export XDG_CACHE_HOME="/Users/florian/.cache"
+export XDG_STATE_HOME="/Users/florian/.local/state"

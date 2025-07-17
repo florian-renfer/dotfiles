@@ -34,4 +34,9 @@ This script destroys all symlinks created by `install.sh`.
 ## Roadmap
 
 - [ ] Extract utility and helper functions used by `install.sh` and `uninstall.sh`
-- [ ] Add configuration files for `neovim`
+- [x] Add configuration files for `neovim`
+- [ ] Add `tmux plugin manager`
+- [ ] Add `homebrew` casks and formulaes
+- [ ] Install utilities `fzf, ripgrep, fd, luarocks, wget, teamviewer, luarocks` via homebrew
+- [ ] Install `node version manager`
+- [ ] Install `sdkman`
