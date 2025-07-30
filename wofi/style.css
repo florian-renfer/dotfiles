@@ -1,0 +1,37 @@
+window {
+    background: rgba(0,0,0,.35);
+    border-radius: 1rem;
+    border: solid #f5bde6 .125rem;
+}
+
+#outer-box {
+    padding: 2rem;
+    border-radius: 1rem;
+}
+
+#input {
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+    border: solid #f5bde6 .125rem;
+    background: rgba(245, 189, 230, .35);
+    color: white;
+}
+
+
+#inner-box {
+    margin-top: 2rem;
+    color: white;
+}
+
+#entry {
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+}
+
+#entry:selected {
+    border: solid #f5bde6 .125rem;
+} 
+
+#text:selected {
+    color: #f5bde6;
+} 

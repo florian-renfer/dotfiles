@@ -8,7 +8,7 @@ return {
 			ensure_installed = { "java", "lua" },
 			auto_install = true,
 			highlight = {
-				enbale = true,
+				enable = true,
 				disable = function(_, bufnr)
 					return vim.api.nvim_buf_line_count(bufnr) > 5000
 				end,

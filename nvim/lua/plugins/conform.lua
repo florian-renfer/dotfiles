@@ -26,13 +26,14 @@ return {
 			markdown = { "prettier" },
 			sql = { "pg_format" },
 			typescript = { "prettier" },
+			yaml = { "yamlfmt" },
 		},
 		-- Set default options
 		default_format_opts = {
 			lsp_format = "fallback",
 		},
 		-- Set up format-on-save
-		format_on_save = { timeout_ms = 500 },
+		format_on_save = { timeout_ms = 2500 },
 	},
 	init = function()
 		-- If you want the formatexpr, here is the place to set it
