@@ -4,6 +4,12 @@ return {
 		exclude = {
 			"markdown",
 		},
+		expand = {
+			"function",
+			"method",
+			"table",
+			"if_statement",
+		},
 	},
 	keys = {
 		{

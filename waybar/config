@@ -40,7 +40,7 @@
   "custom/music": {
     "format": "  {}",
     "escape": true,
-    "interval": 2.5,
+    "interval": 5,
     "tooltip": false,
     "exec": "playerctl metadata --format='{{ artist }} - {{ title }}'",
     "on-click": "playerctl play-pause",
