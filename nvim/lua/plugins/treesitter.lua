@@ -13,7 +13,12 @@ return {
 					return vim.api.nvim_buf_line_count(bufnr) > 5000
 				end,
 			},
-			indent = { enbale = true },
+			indent = {
+				enable = true,
+				disable = function(_, bufnr)
+					return vim.api.nvim_buf_line_count(bufnr) > 5000
+				end,
+			},
 		})
 	end,
 }

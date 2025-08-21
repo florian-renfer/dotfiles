@@ -1,234 +1,321 @@
-/* --- Global Styles --- */
 * {
-  font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
-  font-size: 13px;
-  min-height: 0;
-  padding-right: 0px;
-  padding-left: 0px;
-  padding-bottom: 0px;
+     font-family: "JetBrains Mono Nerd Font";
+     font-weight: bold;
+     font-size: 15px;
 }
-
-/* --- Waybar Container --- */
-#waybar {
-  background: transparent;
-  color: #c6d0f5;
-  margin: 0px;
-  font-weight: 500;
+ #custom-notification {
+     font-family: "JetBrains Mono Nerd Font";
+     font-size: 17px;
+     color: #A1BDCE;
+     margin: 2px 0px 0px 0px;
 }
-
-/* --- Left Modules (Individual, Fully Rounded Blocks - With Horizontal Spacing & Simple Hover) --- */
-#workspaces,
-#cpu,
-#memory {
-  background-color: #1a1b26;
-  padding: 0.4rem 0.7rem;
-  margin: 5px 0px; /* 5px top/bottom margin, 0px left/right (base for individual control) */
-  border-radius: 6px; /* These modules are always rounded */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  min-width: 0;
-  border: none;
-  /* Transition for background-color and color only */
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-  margin-right: 7px;
+ window#waybar {
+     background: #0F0F17;
+    /* border-radius: 15px;
+     */
+    /* border: 2px solid #124323;
+     */
+    /* border: 0px solid #A1BDCE;
+     */
+     border: 3px solid rgba(255, 255, 255, 0.1);
+     border-radius: 10px;
 }
-
-#workspaces {
-  padding: 2px;
-  margin-left: 7px; /* Margin from the far left edge */
-  margin-right: 7px; /* Spacing after the workspaces module */
+ tooltip {
+     background: #171717;
+     color: #A1BDCE;
+     font-size: 13px;
+     border-radius: 7px;
+     border: 2px solid #101a24;
 }
-
-#custom-uptime {
-  margin-right: 5px; /* Spacing after the uptime module */
+ #workspaces{
+     background: rgba(23, 23, 23, 0.0);
+     color: #888789;
+     box-shadow: none;
+     text-shadow: none;
+     border-radius: 9px;
+     transition: 0.2s ease;
+     padding-left: 4px;
+     padding-right: 4px;
+     padding-top: 1px;
 }
-
-/* Simple Hover effects for individual left modules - BRIGHTER COLOR */
-#custom-uptime:hover,
-#cpu:hover {
-  background-color: rgb(41, 42, 53); /* Brighter highlight */
+ #workspaces button {
+     background: rgba(23, 23, 23, 0.0);
+     color: #A1BDCE;
+     box-shadow: none;
+     text-shadow: none;
+     border-radius: 9px;
+     transition: 0.2s ease;
+     padding-left: 4px;
+     padding-right: 4px;
+    /* animation: ws_normal 20s ease-in-out 1;
+     */
 }
-
-#workspaces button {
-  color: #babbf1;
-  border-radius: 5px; /* Workspaces buttons are always rounded */
-  padding: 0.4rem 0.6rem;
-  background: transparent;
-  transition: all 0.2s ease-in-out;
-  border: none;
-  outline: none;
+ #workspaces button.active {
+    /* background-image: url("/home/anik/Documents/bar1.png");
+    */
+     color: #A1BDCE;
+     transition: all 0.3s ease;
+     padding-left: 4px;
+     padding-right: 4px;
+    /* transition: all 0.4s cubic-bezier(.55,0.68,.48,1.682);
+     */
 }
-
-#workspaces button.active {
-  color: #99d1db;
-  background-color: rgba(153, 209, 219, 0.1);
-  box-shadow: inset 0 0 0 1px rgba(153, 209, 219, 0.2);
+ #workspaces button:hover {
+     background: none;
+     color: #72D792;
+     animation: ws_hover 20s ease-in-out 1;
+     transition: all 0.5s cubic-bezier(.55,-0.68,.48,1.682);
 }
-
-#workspaces button:hover {
-  background: rgb(41, 42, 53); /* Reference bright hover color */
-  color: #c6d0f5;
+ #taskbar button {
+     box-shadow: none;
+     text-shadow: none;
+     font-size: 4px;
+     padding: 0px;
+     border-radius: 9px;
+     margin-bottom: 3px;
+     margin-left: 0px;
+     padding-left: 3px;
+     padding-right: 3px;
+     margin-right: 0px;
+     color: @wb-color;
+     animation: tb_normal 20s ease-in-out 1;
 }
-
-/* --- Center Module (Individual, Fully Rounded Block - With Simple Hover) --- */
-#clock {
-  background-color: #1a1b26;
-  padding: 0.4rem 0.7rem;
-  margin: 5px 0px;
-  border-radius: 6px; /* This module is always rounded */
-  box-shadow: 0 1px 3px rgba(153, 209, 219, 0.2);
-  min-width: 0;
-  border: none;
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+ #taskbar button.active {
+     background: @wb-act-bg;
+     color: @wb-act-color;
+     margin-left: 3px;
+     padding-left: 12px;
+     padding-right: 12px;
+     margin-right: 3px;
+     animation: tb_active 20s ease-in-out 1;
+     transition: all 0.4s cubic-bezier(.55,-0.68,.48,1.682);
+     min-height: 9px;
 }
-
-/* Simple Hover effect for clock module - BRIGHTER COLOR */
-#clock:hover {
-  background-color: rgba(153, 209, 219, 0.1); /* Brighter highlight */
+ #taskbar button:hover {
+     background: @wb-hvr-bg;
+     color: @wb-hvr-color;
+     animation: tb_hover 20s ease-in-out 1;
+     transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
 }
-
-#custom-pomodoro {
-    background-color: #1a1b26; /* Consistent dark background */
-    padding: 0.4rem 0.7rem; /* Consistent padding with other modules (e.g., cpu, uptime) */
-    margin: 5px 0px; /* 5px top/bottom margin, 0px left/right (base for individual control) */
-    border-radius: 6px; /* Consistent rounded corners with other individual modules */
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Consistent shadow */
-    min-width: 0;
-    border: none;
-    outline: none; /* Ensure no default outline */
-    /* Transition for background-color, color, outline, and box-shadow for smooth effect */
-    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, outline 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    color: #babbf1; /* A calm color, consistent with custom-uptime */
-    font-weight: 600; /* Slightly bolder for the timer, consistent with clock */
+ #tray menu * {
+     min-height: 16px;
+     font-weight: bold;
+     font-size: 13px;
+     color: #9488e3;
 }
-
-/* Positioning and spacing for the custom-pomodoro module */
-#custom-pomodoro {
-    margin-left: 5px; /* Spacing from the previous module (e.g., clock) */
-    margin-right: 5px; /* Spacing before the seamless right bar starts (e.g., bluetooth) */
+ #tray menu separator {
+     min-height: 10px 
 }
-
-/* Hover effect for the new pomodoro module (consistent with others + rectangular outline) */
-#custom-pomodoro:hover {
-    background-color: rgb(41, 42, 53); /* Brighter highlight, consistent with other individual modules */
-    color: #c6d0f5; /* Text color change on hover, consistent with other individual modules */
-    outline: 1px solid rgba(255, 255, 255, 0.1); /* Rectangular outline on hover */
-    outline-offset: -1px;
+ #custom-spacer{
+     opacity: 0.0;
 }
-
-/* --- Highlighted state for Pomodoro module when running (work or break) --- */
-#custom-pomodoro.work,
-#custom-pomodoro.break {
-  color: #99d1db; /* Text color consistent with active workspaces button */
-  background-color: rgba(153, 209, 219, 0.1); /* Background color consistent with active workspaces button */
-  box-shadow: inset 0 0 0 1px rgba(153, 209, 219, 0.2); /* Inner shadow for outline effect */
-  outline: none;
+ #custom-smallspacer{
+     opacity: 0.0;
 }
-
-/* --- Right Modules (Single, Seamless Bar ) --- */
-#bluetooth,
-#pulseaudio,
-#backlight,
-#network,
-#custom-lock,
-#battery,
-#custom-music{
-  background-color: #1a1b26;
-  padding: 0.4rem 0.7rem;
-  margin: 5px 0px; 
-  border-radius: 6px;
-  box-shadow: none;
-  min-width: 0;
-  border: none;
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+ #custom-mouse{
+     font-size: 14px;
+     margin-bottom: 6px;
+     background: #161320;
 }
-
-#bluetooth:hover,
-#pulseaudio:hover,
-#backlight:hover,
-#network:hover,
-#custom-lock:hover,
-#battery:hover,
-#custom-music:hover {
-  background-color: rgb(41, 42, 53);
+ #custom-power{
+     font-size: 15px;
+     color: #FFFFFF;
+     background: rgba(22, 19, 32, 0.9);
+     margin: 6px 0px 6px 0px;
+     padding-left: 4px;
+     padding-right: 4px;
 }
-
-#custom-music {
-    margin-right: 7px;
+ #backlight{
+     color: #2096C0;
+     background: rgba(23, 23, 23, 0.0);
+     font-weight: normal;
+     font-size: 19px;
+     margin: 1px 0px 0px 0px;
+     padding-left: 0px;
+     padding-right: 2px;
 }
-
-#bluetooth {
-  margin-left: 0px; 
-  border-top-left-radius: 6px;
-  border-bottom-left-radius: 6px;
+ #bluetooth, #custom-cliphist{
+     color: #E6E7E7;
+     background: #161320;
+     opacity: 1;
+     margin: 4px 0px 4px 0px;
+     padding-left: 4px;
+     padding-right: 4px;
 }
-
-#battery {
-  border-top-right-radius: 6px;
-  border-bottom-right-radius: 6px;
+ #battery{
+     font-weight: normal;
+     font-size: 22px;
+     color: #a6d189;
+     background: rgba(23, 23, 23, 0.0);
+     opacity: 1;
+     margin: 0px 0px 0px 0px;
+     padding-left: 0px;
+     padding-right: 0px;
 }
-
-#custom-uptime {
-  color: #babbf1;
+ #idle_inhibitor{
+     color: #24966e;
+     background: @bar-bg;
+     opacity: 1;
+     margin: 4px 0px 4px 0px;
+     padding-left: 4px;
+     padding-right: 4px;
 }
-
-#cpu,
-#memory{
-  color: #c6d0f5;
+ #clock{
+     color: #A1BDCE;
+     font-size: 15px;
+     font-weight: 900;
+     font-family: "JetBrains Mono Nerd Font";
+     background: rgba(23, 23, 23, 0.0);
+     opacity: 1;
+     margin: 3px 0px 0px 0px;
+     padding-left: 10px;
+     padding-right: 10px;
+     border: none;
 }
-
-#clock {
-  color: #99d1db;
-  font-weight: 500;
+ #pulseaudio{
+     font-weight: normal;
+     font-size: 18px;
+     color: #6F8FDB;
+     background: rgba(22, 19, 32, 0.0);
+     opacity: 1;
+     margin: 0px 0px 0px 0px;
+     padding-left: 3px;
+     padding-right: 3px;
 }
-
-#pulseaudio {
-  color: #c6d0f5;
-  margin-right: 7px;
+ #cpu{
+     font-weight: normal;
+     font-size: 22px;
+     color: #915CAF;
 }
-#backlight {
-  color: #c6d0f5;
+ #custom-led{
+     background: #427287;
+     color: #FFFFFF;
+     margin-top: 7px;
+     margin-bottom: 7px;
+     padding-left: 6px;
+     border-radius: 7px;
+     margin-right: 6px;
 }
-
-#network {
-  border-radius: 6px;
-  color: #c6d0f5;
+ #custom-gpuinfo, #custom-keybindhint, #language, #memory{
+     font-weight: normal;
+     font-size: 22px;
+     color: #E4C9AF;
 }
-
-#network.disconnected {
-  color: #e78284;
+ #mpris{
+     color: white;
+     animation: repeat;
+     animation-name: blink;
+     animation-duration: 3s;
+     animation-timing-function: linear;
+     animation-iteration-count: infinite;
+     animation-direction: alternate;
 }
-
-#custom-lock {
-  color: #babbf1;
+ @keyframes blink {
+     to {
+         color: #4a4a4a;
+    }
 }
-#bluetooth {
-  color: #888888;
-  font-size: 16px;
+ #network{
+     color: #A1BDCE;
+     font-weight: normal;
+     font-size: 19px;
+     padding-right: 0px;
+     padding-left: 4px 
 }
-#bluetooth.on {
-  color: #2196f3;
+ #custom-notifications, #custom-spotify, #taskbar, #custom-theme, #custom-menu{
+     color: #E8EDF0;
+     background: rgba(23, 23, 23, 0.0);
+     margin: 0px 0px 0px 0px;
+     padding-left: 1px;
+     padding-right: 1px;
+     opacity: 0.1 
 }
-#bluetooth.connected {
-  color: #99d1db;
+ #tray, #custom-updates, #custom-wallchange, #custom-wbar, #window{
+     color: #A1BDCE;
+     font-family: "Martian Mono";
 }
-#battery {
-  color: #99d1db;;
+ #custom-l_end, #custom-r_end, #custom-sl_end, #custom-sr_end, #custom-rl_end, #cava, #upower#headset, #upower{
+     color: #a6d189;
 }
-#battery.charging {
-  color: #a6d189;
+ #mpris{
+     font-size: 15px;
+     font-weight: bold 
 }
-#battery.warning:not(.charging) {
-  color: #e78284;
+ #custom-rr_end {
+     font-weight: normal;
+     color: #E8EDF0;
+     background: rgba(23, 23, 23, 0.0);
+     opacity: 1;
+     margin: 0px 0px 0px 0px;
+     padding-left: 4px;
+     padding-right: 4px;
+     ;
 }
-
-/* --- Tooltip Styles --- */
-tooltip {
-  background-color: #1a1b26;
-  color: #dddddd;
-  padding: 5px 12px;
-  margin: 5px 0px;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  font-size: 12px;
+ #backlight-slider slider, #pulseaudio-slider slider {
+     background: #A1BDCE;
+     background-color: transparent;
+     box-shadow: none;
+     margin-right: 7px;
 }
+ #backlight-slider trough, #pulseaudio-slider trough {
+     margin-top: -3px;
+     min-width: 90px;
+     min-height: 10px;
+     margin-bottom: -4px;
+     border-radius: 8px;
+     background: #343434;
+}
+ #backlight-slider highlight, #pulseaudio-slider highlight {
+     border-radius: 8px;
+     background-color: #2096C0;
+}
+ #battery.charging, #battery.plugged {
+     color: #E8EDF0;
+}
+ #battery.critical:not(.charging) {
+     color: red;
+}
+ #taskbar {
+     padding: 1px;
+}
+ #custom-r_end {
+     border-radius: 0px 7px 7px 0px;
+     margin-right: 1px;
+     padding-right: 3px;
+}
+ #custom-l_end {
+     border-radius: 7px 0px 0px 7px;
+     margin-left: 1px;
+     padding-left: 3px;
+}
+ #custom-sr_end {
+     border-radius: 0px;
+     margin-right: 1px;
+     padding-right: 3px;
+}
+ #custom-sl_end {
+     border-radius: 0px;
+     margin-left: 1px;
+     padding-left: 3px;
+}
+ #custom-rr_end {
+     border-radius: 0px 7px 7px 0px;
+     margin-right: 1px;
+     padding-right: 3px;
+}
+ #custom-rl_end {
+     border-radius: 7px 0px 0px 7px;
+     margin-left: 1px;
+     padding-left: 3px;
+}
+/* Style for launchers */
+ #custom-expand {
+     min-width: 25px;
+     color: #A1BDCE;
+     font-size: 16px;
+}
+ #group-minimized {
+     border-left: solid;
+     border-left-width: 0.5;
+}
+ 

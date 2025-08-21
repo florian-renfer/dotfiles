@@ -18,6 +18,7 @@ return {
 	opts = {
 		-- Define your formatters
 		formatters_by_ft = {
+			go = { "gofmt" },
 			html = { "prettier" },
 			htmlangular = { "prettier" },
 			java = { "google-java-format" },

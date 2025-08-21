@@ -56,7 +56,10 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 
 -- Default shiftwidth
-vim.opt.shiftwidth = 4
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.expandtab = true
 
 -- Disable the creation of swap files
 vim.opt.swapfile = false
@@ -71,3 +74,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank()
 	end,
 })
+
+-- Disable default syntax highlighting
+vim.cmd("syntax off")
