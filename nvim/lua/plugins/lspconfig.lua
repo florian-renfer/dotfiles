@@ -25,6 +25,7 @@ return {
       "docker_compose_language_service",
       "gh_actions_ls",
       "gopls",
+      "gradle_ls",
       "hyprls",
       "lua_ls",
       "postgres_lsp",

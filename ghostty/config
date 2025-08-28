@@ -1,3 +1,6 @@
+# Shaders (only work with OpenGL >= 4.2, requires Ghostty to be built from source)
+custom-shader = shaders/cursor_blaze.glsl
+
 # Specify theme
 theme = catppuccin-frappe
 
