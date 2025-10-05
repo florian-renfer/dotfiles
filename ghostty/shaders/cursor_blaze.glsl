@@ -64,8 +64,8 @@ vec4 saturate(vec4 color, float factor) {
     float gray = dot(color, vec4(0.299, 0.587, 0.114, 0.)); // luminance
     return mix(vec4(gray), color, factor);
 }
-const vec4 TRAIL_COLOR = vec4(1.0, 0.725, 0.161, 1.0);
-const vec4 TRAIL_COLOR_ACCENT = vec4(1.0, 0., 0., 1.0);
+const vec4 TRAIL_COLOR = vec4(0.961, 0.741, 0.902, 0.933);
+const vec4 TRAIL_COLOR_ACCENT = vec4(0.961, 0.663, 0.498, 0.933);
 const float DURATION = 0.3; //IN SECONDS
 
 void mainImage(out vec4 fragColor, in vec2 fragCoord)

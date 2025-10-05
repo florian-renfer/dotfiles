@@ -22,8 +22,10 @@ return {
     -- WARN: Required filetype definitions are setup using `ftdetect/*.lua` files.
     local lsp_servers = {
       "angularls",
+      "clangd",
       "docker_compose_language_service",
       "gh_actions_ls",
+      "glsl_analyzer",
       "gopls",
       "gradle_ls",
       "hyprls",
