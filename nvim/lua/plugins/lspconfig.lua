@@ -12,13 +12,6 @@ return {
     },
   },
   config = function()
-    local lspconfig_status, lspconfig = pcall(require, "lspconfig")
-
-    if not lspconfig_status then
-      print("LSP: setup failed, neovim/nvim-lspconfig is not available.")
-      return
-    end
-
     -- WARN: Required filetype definitions are setup using `ftdetect/*.lua` files.
     local lsp_servers = {
       "angularls",
@@ -37,7 +30,7 @@ return {
     }
 
     for _, server in ipairs(lsp_servers) do
-      lspconfig[server].setup({})
+      vim.lsp.enable(server)
     end
 
     vim.api.nvim_create_autocmd("LspAttach", {
