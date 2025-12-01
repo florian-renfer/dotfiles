@@ -22,12 +22,30 @@ local config = {
     "--add-opens",
     "java.base/java.lang=ALL-UNNAMED",
     "-jar",
-    home
-    .. "/.local/share/nvim/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_1.7.100.v20251014-1222.jar",
+    vim.fn.glob(home .. "/.local/share/nvim/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_*.jar"),
     "-configuration",
     home .. "/.local/share/nvim/mason/packages/jdtls/config_linux",
     "-data",
     home .. "/.local/share/jdtls/workspace/" .. project_name,
+  },
+  settings = {
+    java = {
+      configuration = {
+        -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
+        -- And search for `interface RuntimeOption`
+        -- The `name` is NOT arbitrary, but must match one of the elements from `enum ExecutionEnvironment` in the link above
+        runtimes = {
+          {
+            name = "JavaSE-17",
+            path = home .. "/.sdkman/candidates/java/17.0.17-amzn",
+          },
+          {
+            name = "JavaSE-21",
+            path = home .. "/.sdkman/candidates/java/21.0.8-amzn",
+          },
+        }
+      }
+    }
   },
   root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git", "mvnw" }, { upward = true })[1]),
 }
