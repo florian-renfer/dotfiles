@@ -30,6 +30,12 @@ local config = {
   },
   settings = {
     java = {
+      completion = {
+        favoriteStaticMembers = {
+          "org.junit.jupiter.api.Assertions.*",
+          "org.mockito.Mockito.*"
+        },
+      },
       configuration = {
         -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
         -- And search for `interface RuntimeOption`

@@ -1,26 +1,33 @@
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'dbout' },
+  callback = function()
+    vim.opt.foldenable = false
+  end,
+})
+
 return {
-	'kristijanhusak/vim-dadbod-ui',
-	dependencies = {
-		{ 'tpope/vim-dadbod',                     lazy = true },
-		{ 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }, lazy = true },
-	},
-	cmd = {
-		'DBUI',
-		'DBUIToggle',
-		'DBUIAddConnection',
-		'DBUIFindBuffer',
-	},
-	init = function()
-		vim.g.db_ui_use_nerd_fonts = 1
-		vim.g.db_ui_auto_execute_table_helpers = 1
-		vim.g.db_ui_table_helpers = {
-			postgresql = {
-				Count = 'select count(*) from "{table}"',
-				Delete = 'delete from "{table}"'
-			}
-		}
-	end,
-	keys = {
-		{ "<leader>dt", "<cmd>:DBUIToggle<cr>", desc = "[D]BUI [t]oggle" },
-	}
+  'kristijanhusak/vim-dadbod-ui',
+  dependencies = {
+    { 'tpope/vim-dadbod',                     lazy = true },
+    { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }, lazy = true },
+  },
+  cmd = {
+    'DBUI',
+    'DBUIToggle',
+    'DBUIAddConnection',
+    'DBUIFindBuffer',
+  },
+  init = function()
+    vim.g.db_ui_use_nerd_fonts = 1
+    vim.g.db_ui_auto_execute_table_helpers = 1
+    vim.g.db_ui_table_helpers = {
+      postgresql = {
+        Count = 'select count(*) from "{table}"',
+        Delete = 'delete from "{table}"'
+      }
+    }
+  end,
+  keys = {
+    { "<leader>dt", "<cmd>:DBUIToggle<cr>", desc = "[D]BUI [t]oggle" },
+  }
 }

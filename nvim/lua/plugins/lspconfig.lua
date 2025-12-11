@@ -23,7 +23,6 @@ return {
       "gradle_ls",
       "hyprls",
       "lua_ls",
-      "postgres_lsp",
       "tailwindcss",
       "ts_ls",
       "yamlls",
