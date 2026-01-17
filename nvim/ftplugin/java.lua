@@ -52,6 +52,7 @@ local config = {
 		},
 	},
 	root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git", "mvnw" }, { upward = true })[1]),
+	-- TODO: install java debuggers properly: https://codeberg.org/mfussenegger/nvim-jdtls#java-debug-bundle-configuration
 }
 
 jdtls.start_or_attach(config)
