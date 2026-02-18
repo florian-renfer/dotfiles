@@ -2,7 +2,8 @@ return {
   'https://gitlab.com/schrieveslaach/sonarlint.nvim',
   dependencies = {
     'mason-org/mason.nvim',
-    'lewis6991/gitsigns.nvim'
+    'lewis6991/gitsigns.nvim',
+    'mfussenegger/nvim-jdtls'
   },
   opts = {
     server = {
