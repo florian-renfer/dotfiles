@@ -64,15 +64,4 @@ vim.opt.expandtab = true
 -- Disable the creation of swap files
 vim.opt.swapfile = false
 
--- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.highlight.on_yank()`
-vim.api.nvim_create_autocmd("TextYankPost", {
-  desc = "Highlight when yanking text",
-  group = vim.api.nvim_create_augroup("highlight-on-yank", { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-})
-
 vim.o.completeopt = "menu,menuone,noselect,noinsert,popup"
