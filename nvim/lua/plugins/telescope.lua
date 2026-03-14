@@ -33,6 +33,7 @@ return {
 			layout_config = {
 				prompt_position = "bottom",
 				height = 0.95,
+				preview_cutoff = 15,
 			},
 		},
 		extensions = {
@@ -49,7 +50,11 @@ return {
 		telescope.load_extension("fzf")
 	end,
 	keys = {
-		{ "<leader>sf", "<cmd>:lua require('telescope.builtin').find_files()<cr>", desc = "[S]earch [f]iles" },
+		{
+			"<leader>sf",
+			"<cmd>:lua require('telescope').extensions.frecency.frecency({ workspace = 'CWD' })<cr>",
+			desc = "[S]earch [f]recency in cwd",
+		},
 		{ "<leader>sg", "<cmd>:lua require('telescope.builtin').live_grep()<cr>", desc = "[S]earch via [g]rep" },
 		{ "<leader>sh", "<cmd>:lua require('telescope.builtin').help_tags()<cr>", desc = "[S]earch neovim [h]elp" },
 		{ "<leader>sc", "<cmd>:lua require('telescope.builtin').colorscheme()<cr>", desc = "[S]earch [c]olorschemes" },

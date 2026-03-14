@@ -6,6 +6,14 @@ return {
 	vim.keymap.set("n", "<leader>ba", ":%bd<CR>", { desc = "Delete [a]ll open buffers" }),
 	vim.keymap.set("n", "<leader>bd", ":bd<CR>", { desc = "[D]elete current buffer" }),
 	vim.keymap.set("n", "<leader>bn", ":enew<CR>", { desc = "[N]ew buffer" }),
+	vim.keymap.set("n", "<leader>bo", function()
+		local current = vim.api.nvim_get_current_buf()
+		for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+			if buf ~= current and vim.api.nvim_buf_is_loaded(buf) then
+				vim.api.nvim_buf_delete(buf, {})
+			end
+		end
+	end, { desc = "Delete all buffers except current [o]nly" }),
 
 	-- Window management
 	vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" }),
