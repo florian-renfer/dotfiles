@@ -1,6 +1,8 @@
+local autocmds = vim.api.nvim_create_augroup("UserConfig", { clear = true })
+
 -- highlight yank
 vim.api.nvim_create_autocmd("TextYankPost", {
-	group = vim.api.nvim_create_augroup("highlight_yank", { clear = true }),
+	group = autocmds,
 	pattern = "*",
 	desc = "highlight selection on yank",
 	callback = function()
@@ -10,6 +12,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 -- restore cursor to file position in previous editing session
 vim.api.nvim_create_autocmd("BufReadPost", {
+	group = autocmds,
 	callback = function(args)
 		local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
 		local line_count = vim.api.nvim_buf_line_count(args.buf)
@@ -25,18 +28,20 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
 -- open help in vertical split
 vim.api.nvim_create_autocmd("FileType", {
+	group = autocmds,
 	pattern = "help",
 	command = "wincmd L",
 })
 
 -- auto resize splits when the terminal's window is resized
 vim.api.nvim_create_autocmd("VimResized", {
+	group = autocmds,
 	command = "wincmd =",
 })
 
 -- no auto continue comments on new line
 vim.api.nvim_create_autocmd("FileType", {
-	group = vim.api.nvim_create_augroup("no_auto_comment", {}),
+	group = autocmds,
 	callback = function()
 		vim.opt_local.formatoptions:remove({ "c", "r", "o" })
 	end,
@@ -44,7 +49,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- syntax highlighting for dotenv files
 vim.api.nvim_create_autocmd("BufRead", {
-	group = vim.api.nvim_create_augroup("dotenv_ft", { clear = true }),
+	group = autocmds,
 	pattern = { ".env", ".env.*" },
 	callback = function()
 		vim.bo.filetype = "dosini"
@@ -53,7 +58,7 @@ vim.api.nvim_create_autocmd("BufRead", {
 
 -- show cursorline only in active window enable
 vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
-	group = vim.api.nvim_create_augroup("active_cursorline", { clear = true }),
+	group = autocmds,
 	callback = function()
 		vim.opt_local.cursorline = true
 	end,
@@ -61,7 +66,7 @@ vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
 
 -- show cursorline only in active window disable
 vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
-	group = "active_cursorline",
+	group = autocmds,
 	callback = function()
 		vim.opt_local.cursorline = false
 	end,
@@ -69,7 +74,7 @@ vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
 
 -- ide like highlight when stopping cursor
 vim.api.nvim_create_autocmd("CursorMoved", {
-	group = vim.api.nvim_create_augroup("LspReferenceHighlight", { clear = true }),
+	group = autocmds,
 	desc = "Highlight references under cursor",
 	callback = function()
 		-- Only run if the cursor is not in insert mode
@@ -94,9 +99,19 @@ vim.api.nvim_create_autocmd("CursorMoved", {
 
 -- ide like highlight when stopping cursor
 vim.api.nvim_create_autocmd("CursorMovedI", {
-	group = "LspReferenceHighlight",
+	group = autocmds,
 	desc = "Clear highlights when entering insert mode",
 	callback = function()
 		vim.lsp.buf.clear_references()
+	end,
+})
+-- wrap, linebreak and spellcheck on markdown and text files
+vim.api.nvim_create_autocmd("FileType", {
+	group = autocmds,
+	pattern = { "markdown", "text", "gitcommit" },
+	callback = function()
+		vim.opt_local.wrap = true
+		vim.opt_local.linebreak = true
+		vim.opt_local.spell = true
 	end,
 })
