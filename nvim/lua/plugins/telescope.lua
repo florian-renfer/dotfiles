@@ -17,52 +17,54 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
-return {
-	"nvim-telescope/telescope.nvim",
-	version = "0.2.1",
-	dependencies = {
-		"nvim-lua/plenary.nvim",
-		"nvim-telescope/telescope-ui-select.nvim",
-		"nvim-telescope/telescope-frecency.nvim",
-		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-	},
-	opts = {
-		defaults = {
-			path_display = filenameFirst,
-			layout_strategy = "vertical",
-			layout_config = {
-				prompt_position = "bottom",
-				height = 0.95,
-				preview_cutoff = 15,
-			},
-		},
-		extensions = {
-			["ui-select"] = {
-				require("telescope.themes").get_dropdown({}),
-			},
-		},
-	},
-	config = function(_, opts)
-		local telescope = require("telescope")
-		telescope.setup(opts)
-		telescope.load_extension("ui-select")
-		telescope.load_extension("frecency")
-		telescope.load_extension("fzf")
-	end,
-	keys = {
-		{
-			"<leader>sf",
-			"<cmd>:lua require('telescope').extensions.frecency.frecency({ workspace = 'CWD' })<cr>",
-			desc = "[S]earch [f]recency in cwd",
-		},
-		{ "<leader>sg", "<cmd>:lua require('telescope.builtin').live_grep()<cr>", desc = "[S]earch via [g]rep" },
-		{ "<leader>sh", "<cmd>:lua require('telescope.builtin').help_tags()<cr>", desc = "[S]earch neovim [h]elp" },
-		{ "<leader>sc", "<cmd>:lua require('telescope.builtin').colorscheme()<cr>", desc = "[S]earch [c]olorschemes" },
-		{
-			"<leader>sp",
-			"<cmd>:lua require('telescope.builtin').oldfiles()<cr>",
-			desc = "[S]earch [p]revious files",
-		},
-		{ "<leader>sk", "<cmd>:lua require('telescope.builtin').keymaps()<cr>", desc = "[S]earch [k]eymaps" },
-	},
-}
+return {}
+
+-- return {
+-- 	"nvim-telescope/telescope.nvim",
+-- 	version = "0.2.1",
+-- 	dependencies = {
+-- 		"nvim-lua/plenary.nvim",
+-- 		"nvim-telescope/telescope-ui-select.nvim",
+-- 		"nvim-telescope/telescope-frecency.nvim",
+-- 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+-- 	},
+-- 	opts = {
+-- 		defaults = {
+-- 			path_display = filenameFirst,
+-- 			layout_strategy = "vertical",
+-- 			layout_config = {
+-- 				prompt_position = "bottom",
+-- 				height = 0.95,
+-- 				preview_cutoff = 15,
+-- 			},
+-- 		},
+-- 		extensions = {
+-- 			["ui-select"] = {
+-- 				require("telescope.themes").get_dropdown({}),
+-- 			},
+-- 		},
+-- 	},
+-- 	config = function(_, opts)
+-- 		local telescope = require("telescope")
+-- 		telescope.setup(opts)
+-- 		telescope.load_extension("ui-select")
+-- 		telescope.load_extension("frecency")
+-- 		telescope.load_extension("fzf")
+-- 	end,
+-- 	keys = {
+-- 		{
+-- 			"<leader>sf",
+-- 			"<cmd>:lua require('telescope').extensions.frecency.frecency({ workspace = 'CWD' })<cr>",
+-- 			desc = "[S]earch [f]recency in cwd",
+-- 		},
+-- 		{ "<leader>sg", "<cmd>:lua require('telescope.builtin').live_grep()<cr>", desc = "[S]earch via [g]rep" },
+-- 		{ "<leader>sh", "<cmd>:lua require('telescope.builtin').help_tags()<cr>", desc = "[S]earch neovim [h]elp" },
+-- 		{ "<leader>sc", "<cmd>:lua require('telescope.builtin').colorscheme()<cr>", desc = "[S]earch [c]olorschemes" },
+-- 		{
+-- 			"<leader>sp",
+-- 			"<cmd>:lua require('telescope.builtin').oldfiles()<cr>",
+-- 			desc = "[S]earch [p]revious files",
+-- 		},
+-- 		{ "<leader>sk", "<cmd>:lua require('telescope.builtin').keymaps()<cr>", desc = "[S]earch [k]eymaps" },
+-- 	},
+-- }
