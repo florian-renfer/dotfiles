@@ -25,6 +25,13 @@ return {
 			desc = "[S]earch [h]elp",
 		},
 		{
+			"<leader>sk",
+			function()
+				require("fzf-lua").keymaps()
+			end,
+			desc = "[S]earch [k]eymaps",
+		},
+		{
 			"<leader>sq",
 			function()
 				require("fzf-lua").diagnostics_document()
