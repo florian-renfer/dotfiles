@@ -1,6 +1,6 @@
 return {
 	"lewis6991/gitsigns.nvim",
-	cmd = { "Gitsigns" },
+	lazy = false,
 	opts = {
 		current_line_blame = true,
 	},
