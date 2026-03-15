@@ -1,89 +1,140 @@
 return {
-  "neovim/nvim-lspconfig",
-  dependencies = {
-    {
-      "folke/lazydev.nvim",
-      ft = "lua",
-      opts = {
-        library = {
-          { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-        },
-      },
-    },
-  },
-  config = function()
-    -- WARN: Required filetype definitions are setup using `ftdetect/*.lua` files.
-    local lsp_servers = {
-      "angularls",
-      "clangd",
-      "docker_compose_language_service",
-      "gh_actions_ls",
-      "glsl_analyzer",
-      "gopls",
-      "gradle_ls",
-      "hyprls",
-      "java-debug-adapter",
-      "java-test",
-      "lua_ls",
-      "tailwindcss",
-      "ts_ls",
-      "yamlls",
-    }
+	"neovim/nvim-lspconfig",
+	dependencies = {
+		{
+			"folke/lazydev.nvim",
+			ft = "lua",
+			opts = {
+				library = {
+					{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+				},
+			},
+		},
+	},
+	config = function()
+		local home = os.getenv("HOME")
+		local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 
-    for _, server in ipairs(lsp_servers) do
-      vim.lsp.enable(server)
-    end
+		local sysname = vim.uv.os_uname().sysname
+		local config_dir = sysname == "Darwin" and home .. "/.local/share/nvim/mason/packages/jdtls/config_mac"
+			or home .. "/.local/share/nvim/mason/packages/jdtls/config_linux"
 
-    vim.api.nvim_create_autocmd("LspAttach", {
-      group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
-      callback = function(event)
-        -- NOTE: Remember that Lua is a real programming language, and as such it is possible
-        -- to define small helper and utility functions so you don't have to repeat yourself.
-        --
-        -- In this case, we create a function that lets us more easily define mappings specific
-        -- for LSP related items. It sets the mode, buffer and description for us each time.
-        local map = function(keys, func, desc, mode)
-          mode = mode or "n"
-          vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
-        end
+		local jdtls_status, jdtls = pcall(require, "jdtls")
+		if not jdtls_status then
+			print("LSP: JDTLS setup failed")
+			return
+		end
 
-        -- Jump to the definition of the word under your cursor.
-        --  This is where a variable was first declared, or where a function is defined, etc.
-        --  To jump back, press <C-t>.
-        map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
+		local java_debug = home
+			.. "/.local/share/nvim/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar"
+		local bundles = {
+			vim.fn.glob(java_debug, 1),
+		}
 
-        -- Find references for the word under your cursor.
-        map("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+		local java_test = home .. "/.local/share/nvim/mason/packages/java-test/extension/server/*.jar"
+		local java_test_bundles = vim.split(vim.fn.glob(java_test, 1), "\n")
+		local excluded = {
+			"com.microsoft.java.test.runner-jar-with-dependencies.jar",
+			"jacocoagent.jar",
+		}
+		for _, java_test_jar in ipairs(java_test_bundles) do
+			local fname = vim.fn.fnamemodify(java_test_jar, ":t")
+			if not vim.tbl_contains(excluded, fname) then
+				table.insert(bundles, java_test_jar)
+			end
+		end
 
-        -- Jump to the implementation of the word under your cursor.
-        --  Useful when your language has ways of declaring types without an actual implementation.
-        map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
+		-- WARN: Required filetype definitions are setup using `ftdetect/*.lua` files.
+		local lsp_servers = {
+			"angularls",
+			"clangd",
+			"docker_compose_language_service",
+			"gh_actions_ls",
+			"glsl_analyzer",
+			"gopls",
+			"gradle_ls",
+			"hyprls",
+			"jdtls",
+			"java-debug-adapter",
+			"java-test",
+			"lua_ls",
+			"tailwindcss",
+			"ts_ls",
+			"yamlls",
+		}
 
-        -- Jump to the type of the word under your cursor.
-        --  Useful when you're not sure what type a variable is and you want to see
-        --  the definition of its *type*, not where it was *defined*.
-        map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
+		vim.lsp.config("jdtls", {
+			cmd = {
+				"java",
+				"-Declipse.application=org.eclipse.jdt.ls.core.id1",
+				"-Dosgi.bundles.defaultStartLevel=4",
+				"-Declipse.product=org.eclipse.jdt.ls.core.product",
+				"-Dlog.level=ALL",
+				"-javaagent:" .. home .. "/.local/share/nvim/mason/packages/jdtls/lombok.jar",
+				"-Xmx4G",
+				"--add-modules=ALL-SYSTEM",
+				"--add-opens",
+				"java.base/java.util=ALL-UNNAMED",
+				"--add-opens",
+				"java.base/java.lang=ALL-UNNAMED",
+				"-jar",
+				vim.fn.glob(
+					home .. "/.local/share/nvim/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_*.jar"
+				),
+				"-configuration",
+				config_dir,
+				"-data",
+				home .. "/.local/share/jdtls/workspace/" .. project_name,
+			},
+			settings = {
+				java = {
+					configuration = {
+						runtimes = {
+							{
+								name = "JavaSE-17",
+								path = home .. "/.sdkman/candidates/java/17.0.17-amzn",
+							},
+							-- NOTE: this is used on Arch Linux
+							-- {
+							--   name = "JavaSE-21",
+							--   path = home .. "/.sdkman/candidates/java/21.0.8-amzn",
+							-- },
+							-- NOTE: this is used on macOS
+							{
+								name = "JavaSE-21",
+								path = home .. "/.sdkman/candidates/java/21.0.7-amzn",
+							},
+						},
+					},
+				},
+			},
+			init_options = {
+				bundles = bundles,
+			},
+		})
 
-        -- Fuzzy find all the symbols in your current document.
-        --  Symbols are things like variables, functions, types, etc.
-        map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
+		for _, server in ipairs(lsp_servers) do
+			vim.lsp.enable(server)
+		end
 
-        -- Fuzzy find all the symbols in your current workspace.
-        --  Similar to document symbols, except searches over your entire project.
-        map("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+		vim.api.nvim_create_autocmd("LspAttach", {
+			group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
+			callback = function(event)
+				local map = function(keys, func, desc, mode)
+					mode = mode or "n"
+					vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+				end
 
-        -- Rename the variable under your cursor.
-        --  Most Language Servers support renaming across files, etc.
-        map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-
-        -- Execute a code action, usually your cursor needs to be on top of an error
-        -- or a suggestion from your LSP for this to activate.
-        map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
-
-        -- WARN: This is not Goto Definition, this is Goto Declaration.
-        --  For example, in C this would take you to the header.
-        map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-      end,
-    })
-  end,
+				map("gd", require("fzf-lua").lsp_definitions, "[G]oto [D]efinition")
+				map("gr", require("fzf-lua").lsp_references, "[G]oto [R]eferences")
+				map("gI", require("fzf-lua").lsp_implementations, "[G]oto [I]mplementation")
+				map("<leader>D", require("fzf-lua").lsp_typedefs, "Type [D]efinition")
+				map("<leader>ds", require("fzf-lua").lsp_document_symbols, "[D]ocument [S]ymbols")
+				map("<leader>ws", require("fzf-lua").lsp_workspace_symbols, "[W]orkspace [S]ymbols")
+				map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+				map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
+				map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+			end,
+		})
+	end,
 }
