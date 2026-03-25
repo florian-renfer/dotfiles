@@ -40,9 +40,8 @@ return {
 			google_java_format = vim.tbl_deep_extend("force", google_java_format, {
 				-- The upstream range wrapper only partially reformats some Java buffers here.
 				-- For save/manual formatting, full-buffer formatting is more reliable.
-				-- TODO: check removal of aosp
 				formatCanRange = false,
-				formatCommand = google_java_format_executable .. " --aosp -",
+				formatCommand = google_java_format_executable .. " -",
 				rootMarkers = {
 					".git",
 					".project",
