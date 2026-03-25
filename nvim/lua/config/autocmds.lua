@@ -1,4 +1,5 @@
 local autocmds = vim.api.nvim_create_augroup("UserConfig", { clear = true })
+local format = require("config.format")
 
 -- highlight yank
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -113,5 +114,29 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.opt_local.wrap = true
 		vim.opt_local.linebreak = true
 		vim.opt_local.spell = true
+	end,
+})
+
+-- Format on save for real file buffers with the preferred attached formatter.
+vim.api.nvim_create_autocmd("BufWritePre", {
+	group = autocmds,
+	pattern = {
+		"*.lua",
+		"*.java",
+		"*.go",
+		"*.js",
+		"*.jsx",
+		"*.ts",
+		"*.tsx",
+		"*.json",
+		"*.css",
+		"*.scss",
+		"*.html",
+		"*.sh",
+		"*.bash",
+		"*.zsh",
+	},
+	callback = function(args)
+		format.format_buffer(args.buf, { notify_missing = true })
 	end,
 })

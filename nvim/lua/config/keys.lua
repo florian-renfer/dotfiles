@@ -1,3 +1,5 @@
+local format = require("config.format")
+
 -- Highlighting
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
@@ -69,3 +71,7 @@ end, { desc = "Copy full file path" })
 vim.keymap.set("n", "<leader>td", function()
 	vim.diagnostic.enable(not vim.diagnostic.is_enabled())
 end, { desc = "Toggle diagnostics" })
+
+vim.keymap.set("n", "<leader>f", function()
+	format.format_buffer(0, { notify_missing = true })
+end, { desc = "[F]ormat current buffer" })

@@ -1,6 +1,5 @@
 -- Colorscheme
 vim.opt.termguicolors = true
-vim.cmd.colorscheme("unokai")
 
 -- Transparency
 local function set_transparent()
@@ -24,7 +23,7 @@ local function set_transparent()
 	vim.api.nvim_set_hl(0, "TabLineFill", { bg = "none", fg = "#767676" })
 end
 
-set_transparent()
+-- set_transparent()
 
 -- Define <leader>
 vim.g.mapleader = " "

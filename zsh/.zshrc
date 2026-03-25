@@ -51,3 +51,6 @@ compdef _lcctl_yargs_completions lcctl
 ###-end-lcctl-completions-###
 
 export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
+
+### This is macOS specific
+export DOCKER_HOST"=unix://$HOME/.orbstack/run/docker.sock"
