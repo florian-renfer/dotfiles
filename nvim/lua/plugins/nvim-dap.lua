@@ -58,6 +58,13 @@ return {
 			desc = "Debug: Test nearest Java method",
 		},
 		{
+			"<F9>",
+			function()
+				require("dap").terminate()
+			end,
+			desc = "Debug: Terminate",
+		},
+		{
 			"<leader>b",
 			function()
 				require("dap").toggle_breakpoint()
@@ -144,6 +151,16 @@ return {
 		-- Dectivated, prevent auto closing
 		-- dap.listeners.before.event_terminated["dapui_config"] = dapui.close
 		-- dap.listeners.before.event_exited["dapui_config"] = dapui.close
+
+		dap.configurations.java = {
+			{
+				type = "java",
+				request = "attach",
+				name = "Attach: bootRun (5005)",
+				hostName = "localhost",
+				port = 5005,
+			},
+		}
 
 		-- Install golang specific config
 		require("dap-go").setup({

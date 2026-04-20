@@ -18,8 +18,8 @@ return {
 			local luacheck = require("efmls-configs.linters.luacheck")
 			local stylua = require("efmls-configs.formatters.stylua")
 
-			local prettier_d = require("efmls-configs.formatters.prettier_d")
 			local eslint_d = require("efmls-configs.linters.eslint_d")
+			local prettier_d = require("efmls-configs.formatters.prettier_d")
 
 			local fixjson = require("efmls-configs.formatters.fixjson")
 
@@ -155,6 +155,10 @@ return {
 		end
 
 		vim.lsp.config("jdtls", {
+			on_init = function(client)
+				client.server_capabilities.documentFormattingProvider = false
+				client.server_capabilities.documentRangeFormattingProvider = false
+			end,
 			cmd = {
 				"java",
 				"-Declipse.application=org.eclipse.jdt.ls.core.id1",
@@ -215,12 +219,6 @@ return {
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
 			callback = function(event)
-				local client = vim.lsp.get_client_by_id(event.data.client_id)
-				if client and client.name == "jdtls" then
-					client.server_capabilities.documentFormattingProvider = false
-					client.server_capabilities.documentRangeFormattingProvider = false
-				end
-
 				local map = function(keys, func, desc, mode)
 					mode = mode or "n"
 					vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })

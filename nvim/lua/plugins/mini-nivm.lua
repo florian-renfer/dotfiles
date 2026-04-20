@@ -11,7 +11,8 @@ return {
 		require("mini.pairs").setup({})
 		require("mini.trailspace").setup({})
 		require("mini.bufremove").setup({})
-		require("mini.notify").setup({})
+		-- Super annoying, crashes often and LSP notifications are driving me crazy
+		-- require("mini.notify").setup({})
 		require("mini.icons").setup({})
 	end,
 }

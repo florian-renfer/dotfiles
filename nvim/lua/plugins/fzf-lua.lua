@@ -2,6 +2,9 @@ return {
 	"ibhagwan/fzf-lua",
 	lazy = false,
 	opts = {},
+	config = function()
+		require("fzf-lua").register_ui_select()
+	end,
 	keys = {
 		{
 			"<leader>sf",
