@@ -102,7 +102,7 @@ return {
 			},
 			prompts = {
 				Doc = {
-					prompt = "Write clear, concise, easy to read, easy to maintain, and developer focused documentation for all methods, including parameters, return types and exceptions or errors according to the given filestype and programming language. Follow industry standards and best-practices respectively.",
+					prompt = "Write clear, concise, easy to read, easy to maintain, and developer focused documentation for all methods, including parameters, return types and exceptions or errors according to the given filestype and programming language. Follow industry standards and best-practices respectively. Focus on why rather than what.",
 					system_prompt = "You are an expert Fullstack Software Enginierr proficient in every industry related programming language. You are aware of development patterns, widely used frameworks and libraries as well as the tooling for certain ecosystems. If required, you import required types, classes, etc. You don't like fully qualified names in your documentation if possible.",
 					description = "Developer Documentation.",
 					resources = {

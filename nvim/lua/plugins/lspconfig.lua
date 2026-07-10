@@ -14,12 +14,48 @@ return {
 	config = function()
 		local home = os.getenv("HOME")
 
+		vim.lsp.config("*", {
+			handlers = {
+				["textDocument/hover"] = function(err, result, ctx, config)
+					config = vim.tbl_deep_extend("force", config or {}, { border = "rounded", max_width = 80 })
+					vim.lsp.handlers.hover(err, result, ctx, config)
+				end,
+			},
+		})
+
 		do
 			local luacheck = require("efmls-configs.linters.luacheck")
 			local stylua = require("efmls-configs.formatters.stylua")
 
 			local eslint_d = require("efmls-configs.linters.eslint_d")
 			local prettier_d = require("efmls-configs.formatters.prettier_d")
+
+			local oxlint = {
+				lintCommand = "oxlint --format unix ${INPUT}",
+				lintStdin = false,
+				lintIgnoreExitCode = true,
+				lintFormats = {
+					"%f:%l:%c: %m",
+				},
+				rootMarkers = {
+					".oxlintrc.json",
+					".oxlintrc.jsonc",
+					"package.json",
+					"tsconfig.json",
+					".git",
+				},
+			}
+			local oxfmt = {
+				formatCommand = "oxfmt --stdin-filepath ${INPUT}",
+				formatStdin = true,
+				rootMarkers = {
+					".oxlintrc.json",
+					".oxlintrc.jsonc",
+					"package.json",
+					"tsconfig.json",
+					".git",
+				},
+			}
 
 			local fixjson = require("efmls-configs.formatters.fixjson")
 
@@ -36,6 +72,9 @@ return {
 					google_java_format_executable = "google-java-format"
 				end
 			end
+
+			local sqlfluff_lint = require("efmls-configs.linters.sqlfluff")
+			local sqlfluff_format = require("efmls-configs.formatters.sqlfluff")
 
 			google_java_format = vim.tbl_deep_extend("force", google_java_format, {
 				-- The upstream range wrapper only partially reformats some Java buffers here.
@@ -56,8 +95,8 @@ return {
 				},
 			})
 
-			-- local go_revive = require("efmls-configs.linters.go_revive")
-			-- local gofumpt = require("efmls-configs.formatters.gofumpt")
+			local go_revive = require("efmls-configs.linters.go_revive")
+			local gofumpt = require("efmls-configs.formatters.gofumpt")
 
 			vim.lsp.config("efm", {
 				filetypes = {
@@ -76,6 +115,7 @@ return {
 					"markdown",
 					"python",
 					"sh",
+					"sql",
 					"typescript",
 					"typescriptreact",
 					"vue",
@@ -84,20 +124,21 @@ return {
 				init_options = { documentFormatting = true },
 				settings = {
 					languages = {
-						-- go = { gofumpt, go_revive },
-						css = { prettier_d },
-						html = { prettier_d },
-						htmlangular = { prettier_d },
+						css = { oxfmt },
+						go = { gofumpt, go_revive },
+						html = { oxfmt },
+						htmlangular = { oxfmt },
 						java = { google_java_format },
-						javascript = { eslint_d, prettier_d },
-						javascriptreact = { eslint_d, prettier_d },
-						json = { eslint_d, fixjson },
-						jsonc = { eslint_d, fixjson },
+						javascript = { oxlint, oxfmt },
+						javascriptreact = { oxlint, oxfmt },
+						json = { oxlint, fixjson },
+						jsonc = { oxlint, fixjson },
 						lua = { luacheck, stylua },
-						markdown = { prettier_d },
+						markdown = { oxfmt },
 						sh = { shellcheck, shfmt },
-						typescript = { eslint_d, prettier_d },
-						typescriptreact = { eslint_d, prettier_d },
+						sql = { sqlfluff_lint, sqlfluff_format },
+						typescript = { oxlint, oxfmt },
+						typescriptreact = { oxlint, oxfmt },
 					},
 				},
 			})
@@ -118,6 +159,7 @@ return {
 			"java-debug-adapter",
 			"java-test",
 			"lua_ls",
+			"sqlls",
 			"tailwindcss",
 			"ts_ls",
 			"yamlls",

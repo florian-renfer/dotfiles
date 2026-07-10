@@ -5,6 +5,7 @@ eval "$(direnv hook zsh)"
 # Append ~/github.com/florian-renfer/dotfiles/scripts/ to PATH in order to use custom scripts, e.g. tmux-sessionizer or xdg-init
 path+=("$HOME/github.com/florian-renfer/dotfiles/scripts")
 path+=("${KREW_ROOT:-$HOME/.krew}/bin")
+path+=("${GOBIN:-$HOME/go}/bin")
 export PATH
 
 # Initialize node version manager
@@ -49,8 +50,6 @@ _lcctl_yargs_completions()
 }
 compdef _lcctl_yargs_completions lcctl
 ###-end-lcctl-completions-###
-
-export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
 
 ### This is macOS specific
 export DOCKER_HOST"=unix://$HOME/.orbstack/run/docker.sock"
