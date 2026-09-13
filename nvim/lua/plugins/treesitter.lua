@@ -3,9 +3,22 @@ return {
 	lazy = false,
 	build = ":TSUpdate",
 	branch = "main",
+	dependencies = {
+		{
+			"windwp/nvim-ts-autotag",
+		},
+	},
 	config = function()
 		local parsers = { "bash", "diff", "html", "java", "lua", "luadoc", "markdown", "markdown_inline", "sql" }
 		require("nvim-treesitter").install(parsers)
+
+		require("nvim-ts-autotag").setup({
+			opts = {
+				enable_close = true, -- Auto close tags
+				enable_rename = true, -- Auto rename pairs of tags
+				enable_close_on_slash = true, -- Auto close on trailing </
+			},
+		})
 
 		vim.api.nvim_create_autocmd("FileType", {
 			callback = function(args)

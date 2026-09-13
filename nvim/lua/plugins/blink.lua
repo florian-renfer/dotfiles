@@ -2,7 +2,15 @@ return {
 	{
 		"saghen/blink.cmp",
 		-- optional: provides snippets for the snippet source
-		dependencies = { "rafamadriz/friendly-snippets" },
+		dependencies = {
+			{
+				"mikavilpas/blink-ripgrep.nvim",
+				version = "*", -- use the latest stable version
+			},
+			{
+				"rafamadriz/friendly-snippets",
+			},
+		},
 
 		-- use a release tag to download pre-built binaries
 		version = "1.*",
@@ -40,7 +48,27 @@ return {
 			-- Default list of enabled providers defined so that you can extend it
 			-- elsewhere in your config, without redefining it, due to `opts_extend`
 			sources = {
-				default = { "lsp", "path", "snippets", "buffer" },
+				default = { "lsp", "path", "snippets", "ripgrep", "buffer" },
+				providers = {
+					ripgrep = {
+						module = "blink-ripgrep",
+						name = "Ripgrep",
+						-- see the full configuration below for all available options
+						---@module "blink-ripgrep"
+						---@type blink-ripgrep.Options
+						opts = {
+							backend = {
+								-- The backend to use for searching. Defaults to "ripgrep".
+								-- Available options:
+								-- - "ripgrep", always use ripgrep
+								-- - "gitgrep", always use git grep
+								-- - "gitgrep-or-ripgrep", use git grep if possible, otherwise
+								--   use ripgrep. Uses the same options as the gitgrep backend
+								use = "gitgrep-or-ripgrep",
+							},
+						},
+					},
+				},
 			},
 
 			-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
@@ -57,11 +85,10 @@ return {
 		dependencies = "saghen/blink.lib",
 
 		version = "*",
-		-- build native library from source (works for non-release commits too)
+		-- download the pre-built native library
 		build = function()
-			require("blink.pairs").build():pwait(60000)
+			require("blink.pairs").download():pwait(60000)
 		end,
-
 		--- @module 'blink.pairs'
 		--- @type blink.pairs.Config
 		opts = {

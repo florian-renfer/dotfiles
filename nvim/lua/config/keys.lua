@@ -75,3 +75,5 @@ end, { desc = "Toggle diagnostics" })
 vim.keymap.set("n", "<leader>f", function()
 	format.format_buffer(0, { notify_missing = true })
 end, { desc = "[F]ormat current buffer" })
+
+vim.keymap.set({ "n", "t" }, "<leader>t", ":Floaterm<CR>", { desc = "[T]oggle Terminal" })

@@ -8,9 +8,6 @@ path+=("${KREW_ROOT:-$HOME/.krew}/bin")
 path+=("${GOBIN:-$HOME/go}/bin")
 export PATH
 
-# Initialize node version manager
-source /usr/share/nvm/init-nvm.sh
-
 # Appended due to running xdg-init
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
@@ -18,9 +15,9 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_STATE_HOME="$HOME/.local/state"
 
 # Always work in a tmux session if Tmux is installed
-if which tmux 2>&1 >/dev/null; then
-  if [ $TERM != "screen-256color" ] && [  $TERM != "screen" ]; then
-    tmux attach -t default || tmux new -s default; exit
+if which tmux >/dev/null 2>&1; then
+  if [ -z "$TMUX" ] && [ "$TERM" != "screen-256color" ] && [ "$TERM" != "screen" ]; then
+    tmux attach -t default || tmux new -s default
   fi
 fi
 

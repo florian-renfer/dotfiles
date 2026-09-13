@@ -44,20 +44,6 @@ return {
 			desc = "Debug: Start/Continue",
 		},
 		{
-			"<F6>",
-			function()
-				require("jdtls").test_class()
-			end,
-			desc = "Debug: Test Java class",
-		},
-		{
-			"<F7>",
-			function()
-				require("jdtls").test_nearest_method()
-			end,
-			desc = "Debug: Test nearest Java method",
-		},
-		{
 			"<F9>",
 			function()
 				require("dap").terminate()
